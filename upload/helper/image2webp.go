@@ -28,10 +28,10 @@ func Image2Webp(fileBytes []byte, quality uint) (compressedImage *CompressedImag
 		Run(); err != nil {
 		return nil, errors.New("webp compress failed")
 	}
-
+	
 	reader := bytes.NewReader(buf.Bytes())
 	oriRender := bytes.NewReader(oriBuf.Bytes())
-	
+
 	return &CompressedImage{
 		Hash:    MakeHashByBytes(fileBytes),
 		Buf:     buf,

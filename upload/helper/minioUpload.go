@@ -58,7 +58,6 @@ func MinioFileUpload(params *MinioFileUploadParams) (urls *MinioFileReturnPaths,
 			OriFilePath: oriFilePath,
 		}, nil
 	} else {
-		fmt.Println(err.Error(), "xxxx")
 		return nil, err
 	}
 }

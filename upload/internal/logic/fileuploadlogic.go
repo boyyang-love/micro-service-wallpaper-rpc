@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/models"
@@ -28,7 +29,7 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 
 func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUploadRes, error) {
 
-	is, info, err := l.IsHave(helper.MakeHashByBytes(in.File), in.FileType, in.UserId)
+	is, info, err := l.IsHave(helper.MakeHashByBytes(in.File), in.Type, in.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -111,14 +112,15 @@ func (l *FileUploadLogic) InsertToMySql(uploadParams *models.Upload) error {
 	return nil
 }
 
-func (l *FileUploadLogic) IsHave(hash string, fileType string, userId string) (is bool, info *models.Upload, err error) {
+func (l *FileUploadLogic) IsHave(hash string, uploadType string, userId string) (is bool, info *models.Upload, err error) {
 	if err := l.svcCtx.
 		DB.
 		Model(&models.Upload{}).
 		Select("hash", "type", "user_id", "file_name", "file_path", "origin_file_path").
-		Where("hash = ? and type = ? and user_id = ?", hash, fileType, userId).
+		Where("hash = ? and type = ? and user_id = ?", hash, uploadType, userId).
 		First(&info).
 		Error; errors.As(err, &gorm.ErrRecordNotFound) {
+		fmt.Println("xxxx")
 		return false, info, nil
 	} else {
 		return true, info, nil
