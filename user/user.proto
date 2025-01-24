@@ -3,11 +3,6 @@ syntax = "proto3";
 package upload;
 option go_package = "./upload";
 
-message Base{
-  int32 code = 1;
-  string msg = 2;
-}
-
 message FileUploadReq {
   bytes  file = 1;
   string fileName = 2;
@@ -23,11 +18,6 @@ message FileUploadReq {
 }
 
 message FileUploadRes {
-  Base base = 1;
-  FileUploadResData data = 2;
-}
-
-message FileUploadResData {
   string fileName = 1;
   string oriFilePath = 2;
   string filePath = 3;

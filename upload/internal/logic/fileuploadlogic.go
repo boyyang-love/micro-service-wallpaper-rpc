@@ -27,6 +27,26 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 }
 
 func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUploadRes, error) {
+
+	is, info, err := l.IsHave(helper.MakeHashByBytes(in.File), in.FileType, in.UserId)
+	if err != nil {
+		return nil, err
+	}
+
+	if is {
+		return &upload.FileUploadRes{
+			Base: &upload.Base{
+				Code: 1,
+				Msg:  "文件上传成功",
+			},
+			Data: &upload.FileUploadResData{
+				FileName:    in.FileName,
+				OriFilePath: info.OriginFilePath,
+				FilePath:    info.FilePath,
+			},
+		}, nil
+	}
+
 	compressedImage, err := helper.Image2Webp(in.File, uint(in.Quality))
 	if err != nil {
 		return nil, err
@@ -67,28 +87,40 @@ func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUplo
 	}
 
 	return &upload.FileUploadRes{
-		FileName:    in.FileName,
-		FilePath:    urls.FilePath,
-		OriFilePath: urls.OriFilePath,
+		Base: &upload.Base{
+			Code: 1,
+			Msg:  "文件上传成功",
+		},
+		Data: &upload.FileUploadResData{
+			FileName:    in.FileName,
+			OriFilePath: urls.OriFilePath,
+			FilePath:    urls.FilePath,
+		},
 	}, nil
 }
 
 func (l *FileUploadLogic) InsertToMySql(uploadParams *models.Upload) error {
-	var uploadModel models.Upload
 	if err := l.svcCtx.
 		DB.
 		Model(&models.Upload{}).
-		Where("hash = ? and type = ?", uploadParams.Hash, uploadParams.Type).
-		First(&uploadModel).
-		Error; errors.As(err, &gorm.ErrRecordNotFound) {
-		if err = l.svcCtx.
-			DB.
-			Model(&models.Upload{}).
-			Create(uploadParams).
-			Error; err != nil {
-			return err
-		}
+		Create(uploadParams).
+		Error; err != nil {
+		return err
 	}
 
 	return nil
+}
+
+func (l *FileUploadLogic) IsHave(hash string, fileType string, userId string) (is bool, info *models.Upload, err error) {
+	if err := l.svcCtx.
+		DB.
+		Model(&models.Upload{}).
+		Select("hash", "type", "user_id", "file_name", "file_path", "origin_file_path").
+		Where("hash = ? and type = ? and user_id = ?", hash, fileType, userId).
+		First(&info).
+		Error; errors.As(err, &gorm.ErrRecordNotFound) {
+		return false, info, nil
+	} else {
+		return true, info, nil
+	}
 }

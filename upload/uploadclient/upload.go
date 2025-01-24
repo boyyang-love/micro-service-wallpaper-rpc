@@ -14,8 +14,10 @@ import (
 )
 
 type (
-	FileUploadReq = upload.FileUploadReq
-	FileUploadRes = upload.FileUploadRes
+	Base              = upload.Base
+	FileUploadReq     = upload.FileUploadReq
+	FileUploadRes     = upload.FileUploadRes
+	FileUploadResData = upload.FileUploadResData
 
 	Upload interface {
 		FileUpload(ctx context.Context, in *FileUploadReq, opts ...grpc.CallOption) (*FileUploadRes, error)
