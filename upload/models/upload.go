@@ -12,7 +12,7 @@ type Upload struct {
 	FileName       string `json:"file_name" form:"file_name"`
 	OriginFileSize int64  `json:"origin_file_size" form:"origin_file_size"`
 	FileSize       int64  `json:"file_size" form:"file_size"`
-	OriginFileType string `json:"origin_file_type" form:"origin_file_type"`
+	OriginType     string `json:"origin_type" form:"origin_type"`
 	FileType       string `json:"file_type" form:"file_type"`
 	OriginFilePath string `json:"origin_file_path" form:"origin_file_path"`
 	FilePath       string `json:"file_path" form:"file_path"`

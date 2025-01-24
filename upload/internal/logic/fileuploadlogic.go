@@ -7,6 +7,7 @@ import (
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/models"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/pb/upload"
+	"gorm.io/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,13 +27,12 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 }
 
 func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUploadRes, error) {
-
 	compressedImage, err := helper.Image2Webp(in.File, uint(in.Quality))
 	if err != nil {
 		return nil, err
 	}
 
-	urls, err := helper.MinioFileUpload(&helper2.MinioFileUploadParams{
+	urls, err := helper.MinioFileUpload(&helper.MinioFileUploadParams{
 		Ctx:         l.ctx,
 		MinioClient: l.svcCtx.MinioClient,
 		Buf:         compressedImage.Buf,
@@ -40,7 +40,8 @@ func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUplo
 		FileHash:    compressedImage.Hash,
 		Folder:      in.Folder,
 		OriFolder:   in.OriFolder,
-		Filename:    in.FileName,
+		FileName:    in.FileName,
+		FileType:    in.FileType,
 		BucketName:  in.BucketName,
 	})
 	if err != nil {
@@ -52,7 +53,7 @@ func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUplo
 		FileName:       in.FileName,
 		OriginFileSize: compressedImage.OriSize,
 		FileSize:       compressedImage.Size,
-		OriginFileType: in.FileType,
+		OriginType:     in.FileType,
 		FileType:       "webp",
 		OriginFilePath: urls.OriFilePath,
 		FilePath:       urls.FilePath,

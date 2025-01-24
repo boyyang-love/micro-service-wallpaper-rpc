@@ -3,6 +3,7 @@ package helper
 import (
 	"bytes"
 	"crypto/md5"
+	"errors"
 	"fmt"
 	"github.com/nickalie/go-webpbin"
 )
@@ -19,27 +20,18 @@ func Image2Webp(fileBytes []byte, quality uint) (compressedImage *CompressedImag
 
 	buf := new(bytes.Buffer)
 	oriBuf := bytes.NewBuffer(fileBytes)
-	reader := new(bytes.Reader)
-	oriRender := new(bytes.Reader)
 
 	if err = webpbin.NewCWebP().
 		Quality(quality).
 		Input(bytes.NewReader(fileBytes)).
 		Output(buf).
 		Run(); err != nil {
-		return nil, err
+		return nil, errors.New("webp compress failed")
 	}
 
-	_, err = reader.Read(buf.Bytes())
-	if err != nil {
-		return nil, err
-	}
-
-	_, err = oriRender.Read(oriBuf.Bytes())
-	if err != nil {
-		return nil, err
-	}
-
+	reader := bytes.NewReader(buf.Bytes())
+	oriRender := bytes.NewReader(oriBuf.Bytes())
+	
 	return &CompressedImage{
 		Hash:    MakeHashByBytes(fileBytes),
 		Buf:     buf,

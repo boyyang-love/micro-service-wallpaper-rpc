@@ -1,5 +1,7 @@
 Name: upload.rpc
 ListenOn: 0.0.0.0:8080
+Log:
+  Mode: file
 MySQLConf:
   Host: '47.109.86.251'
   Port: 3306
@@ -14,7 +16,7 @@ MinioClientConf:
   Endpoint: 47.109.86.251:9000
   AccessKey: nORa7vVFmamIow77uug4
   SecretKey: LZRLI5glyKZaoJsUQH87E74PxJENTazFSAIOuiCI
-  Secure: true
+  Secure: false
 
 Etcd:
   Hosts:

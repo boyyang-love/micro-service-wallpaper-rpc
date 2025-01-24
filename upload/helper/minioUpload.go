@@ -15,7 +15,8 @@ type MinioFileUploadParams struct {
 	FileHash    string
 	Folder      string
 	OriFolder   string
-	Filename    string
+	FileName    string
+	FileType    string
 	BucketName  string
 }
 
@@ -26,9 +27,9 @@ type MinioFileReturnPaths struct {
 
 func MinioFileUpload(params *MinioFileUploadParams) (urls *MinioFileReturnPaths, err error) {
 
-	fileName := fmt.Sprintf("%s-%s.webp", FileNameNoExt(params.Filename), params.FileHash)
+	fileName := fmt.Sprintf("%s-%s.webp", FileNameNoExt(params.FileName), params.FileHash)
 	filePath := fmt.Sprintf("%s/%s", params.Folder, fileName)
-	oriFilePath := fmt.Sprintf("%s/%s", params.OriFolder, params.Filename)
+	oriFilePath := fmt.Sprintf("%s/%s-%s.%s", params.OriFolder, FileNameNoExt(params.FileName), params.FileHash, params.FileType)
 
 	reader := bytes.NewReader(params.Buf.Bytes())
 	oriReader := bytes.NewReader(params.OriBuf.Bytes())
@@ -57,6 +58,7 @@ func MinioFileUpload(params *MinioFileUploadParams) (urls *MinioFileReturnPaths,
 			OriFilePath: oriFilePath,
 		}, nil
 	} else {
+		fmt.Println(err.Error(), "xxxx")
 		return nil, err
 	}
 }
