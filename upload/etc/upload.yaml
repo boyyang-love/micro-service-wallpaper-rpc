@@ -1,8 +1,10 @@
 Name: upload.rpc
 ListenOn: 0.0.0.0:8080
 Timeout: 25000
+# 日志
 Log:
   Mode: file
+# mysql
 MySQLConf:
   Host: '47.109.86.251'
   Port: 3306
@@ -12,7 +14,7 @@ MySQLConf:
   Charset: utf8mb4
   Collation: utf8mb4_unicode_ci
   Timeout: 10s
-
+# minio
 MinioClientConf:
   Endpoint: 47.109.86.251:9000
   AccessKey: nORa7vVFmamIow77uug4
