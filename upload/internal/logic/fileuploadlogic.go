@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/models"
@@ -41,7 +40,7 @@ func (l *FileUploadLogic) FileUpload(in *upload.FileUploadReq) (*upload.FileUplo
 				Msg:  "文件上传成功",
 			},
 			Data: &upload.FileUploadResData{
-				FileName:    in.FileName,
+				FileName:    info.FileName,
 				OriFilePath: info.OriginFilePath,
 				FilePath:    info.FilePath,
 			},
@@ -120,7 +119,6 @@ func (l *FileUploadLogic) IsHave(hash string, uploadType string, userId string) 
 		Where("hash = ? and type = ? and user_id = ?", hash, uploadType, userId).
 		First(&info).
 		Error; errors.As(err, &gorm.ErrRecordNotFound) {
-		fmt.Println("xxxx")
 		return false, info, nil
 	} else {
 		return true, info, nil

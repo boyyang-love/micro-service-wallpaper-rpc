@@ -6,7 +6,7 @@ Log:
   Mode: file
 # mysql
 MySQLConf:
-  Host: '47.109.86.251'
+  Host: 47.109.86.251
   Port: 3306
   Database: boyyangblog
   Username: boyyang

@@ -14,12 +14,20 @@ import (
 )
 
 type (
-	AddUserReq = user.AddUserReq
-	AddUserRes = user.AddUserRes
-	Base       = user.Base
+	AddUserReq      = user.AddUserReq
+	AddUserRes      = user.AddUserRes
+	AddUserResData  = user.AddUserResData
+	Base            = user.Base
+	UpdateUserReq   = user.UpdateUserReq
+	UpdateUserRes   = user.UpdateUserRes
+	UserInfoReq     = user.UserInfoReq
+	UserInfoRes     = user.UserInfoRes
+	UserInfoResData = user.UserInfoResData
 
 	User interface {
 		AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserRes, error)
+		UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserRes, error)
+		UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoRes, error)
 	}
 
 	defaultUser struct {
@@ -36,4 +44,14 @@ func NewUser(cli zrpc.Client) User {
 func (m *defaultUser) AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserRes, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.AddUser(ctx, in, opts...)
+}
+
+func (m *defaultUser) UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserRes, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.UpdateUser(ctx, in, opts...)
+}
+
+func (m *defaultUser) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoRes, error) {
+	client := user.NewUserClient(m.cli.Conn())
+	return client.UserInfo(ctx, in, opts...)
 }

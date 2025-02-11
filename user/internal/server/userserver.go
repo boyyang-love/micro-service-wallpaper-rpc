@@ -27,3 +27,13 @@ func (s *UserServer) AddUser(ctx context.Context, in *user.AddUserReq) (*user.Ad
 	l := logic.NewAddUserLogic(ctx, s.svcCtx)
 	return l.AddUser(in)
 }
+
+func (s *UserServer) UpdateUser(ctx context.Context, in *user.UpdateUserReq) (*user.UpdateUserRes, error) {
+	l := logic.NewUpdateUserLogic(ctx, s.svcCtx)
+	return l.UpdateUser(in)
+}
+
+func (s *UserServer) UserInfo(ctx context.Context, in *user.UserInfoReq) (*user.UserInfoRes, error) {
+	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
+	return l.UserInfo(in)
+}
