@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	User_AddUser_FullMethodName    = "/upload.User/AddUser"
-	User_UpdateUser_FullMethodName = "/upload.User/UpdateUser"
-	User_UserInfo_FullMethodName   = "/upload.User/UserInfo"
+	User_AddUser_FullMethodName    = "/user.User/AddUser"
+	User_UpdateUser_FullMethodName = "/user.User/UpdateUser"
+	User_UserInfo_FullMethodName   = "/user.User/UserInfo"
 )
 
 // UserClient is the client API for User service.
@@ -162,7 +162,7 @@ func _User_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "upload.User",
+	ServiceName: "user.User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
