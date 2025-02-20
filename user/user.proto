@@ -4,8 +4,8 @@ package user;
 option go_package = "./user";
 
 message Base{
-  uint32 code = 1;
-  string msg = 2;
+  uint32 Code = 1;
+  string Msg = 2;
 }
 
 message AddUserReq {

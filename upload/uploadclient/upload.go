@@ -2,7 +2,7 @@
 // goctl 1.7.2
 // Source: upload.proto
 
-package uploadclient
+package uploadClient
 
 import (
 	"context"
@@ -14,13 +14,17 @@ import (
 )
 
 type (
-	Base              = upload.Base
-	FileUploadReq     = upload.FileUploadReq
-	FileUploadRes     = upload.FileUploadRes
-	FileUploadResData = upload.FileUploadResData
+	Base               = upload.Base
+	FileUploadReq      = upload.FileUploadReq
+	FileUploadRes      = upload.FileUploadRes
+	FileUploadResData  = upload.FileUploadResData
+	ImageUploadReq     = upload.ImageUploadReq
+	ImageUploadRes     = upload.ImageUploadRes
+	ImageUploadResData = upload.ImageUploadResData
 
 	Upload interface {
 		FileUpload(ctx context.Context, in *FileUploadReq, opts ...grpc.CallOption) (*FileUploadRes, error)
+		ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error)
 	}
 
 	defaultUpload struct {
@@ -37,4 +41,9 @@ func NewUpload(cli zrpc.Client) Upload {
 func (m *defaultUpload) FileUpload(ctx context.Context, in *FileUploadReq, opts ...grpc.CallOption) (*FileUploadRes, error) {
 	client := upload.NewUploadClient(m.cli.Conn())
 	return client.FileUpload(ctx, in, opts...)
+}
+
+func (m *defaultUpload) ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error) {
+	client := upload.NewUploadClient(m.cli.Conn())
+	return client.ImageUpload(ctx, in, opts...)
 }
