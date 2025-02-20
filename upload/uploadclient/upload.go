@@ -2,7 +2,7 @@
 // goctl 1.7.2
 // Source: upload.proto
 
-package uploadClient
+package uploadclient
 
 import (
 	"context"
