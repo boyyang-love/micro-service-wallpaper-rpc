@@ -33,8 +33,8 @@ func (l *ImageUploadLogic) ImageUpload(in *upload.ImageUploadReq) (*upload.Image
 		return nil, err
 	}
 
-	imagePath := fmt.Sprintf("%s%s.webp", in.Path, helper.FileNameNoExt(in.FileName))
-	oriImagePath := fmt.Sprintf("%s%s", in.OriPath, in.FileName)
+	imagePath := fmt.Sprintf("%s/%s.webp", in.Path, helper.FileNameNoExt(in.FileName))
+	oriImagePath := fmt.Sprintf("%s/%s", in.OriPath, in.FileName)
 	uploadInfo, err := l.svcCtx.
 		MinioClient.
 		PutObject(

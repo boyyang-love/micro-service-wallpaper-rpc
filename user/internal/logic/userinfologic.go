@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/models"
+	"github.com/boyyang-love/micro-service-wallpaper-models/models"
 
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/pb/user"
@@ -44,7 +44,7 @@ func (l *UserInfoLogic) UserInfo(in *user.UserInfoReq) (*user.UserInfoRes, error
 			Msg:  "查询成功",
 		},
 		Data: &user.UserInfoResData{
-			Id:       uint64(userInfo.Id),
+			Id:       userInfo.Id,
 			Username: userInfo.Username,
 			Account:  userInfo.Account,
 			Motto:    userInfo.Motto,

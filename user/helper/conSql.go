@@ -2,8 +2,8 @@ package helper
 
 import (
 	"fmt"
+	"github.com/boyyang-love/micro-service-wallpaper-models/models"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/internal/config"
-	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"

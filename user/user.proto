@@ -21,13 +21,13 @@ message AddUserRes {
 }
 
 message AddUserResData {
-  uint64 Id = 1;
+  string Id = 1;
   string Username = 2;
   string Account = 3;
 }
 
 message UpdateUserReq {
-  uint64 Id = 1;
+  string Id = 1;
   string Motto = 2;
   string Address = 3;
   string Tel = 4;
@@ -45,7 +45,7 @@ message UpdateUserRes{
 }
 
 message UserInfoReq {
-  uint64 Id = 1;
+  string Id = 1;
 }
 
 message UserInfoRes {
@@ -54,7 +54,7 @@ message UserInfoRes {
 }
 
 message UserInfoResData {
-  uint64 Id = 1;
+  string Id = 1;
   string Username = 2;
   string Account = 3;
   string Motto = 4;
@@ -69,8 +69,24 @@ message UserInfoResData {
   string Cover = 13;
 }
 
+message LoginReq {
+  string Username = 1;
+  string Password = 2;
+}
+
+message LoginRes {
+  Base base = 1;
+  LoginResData data = 2;
+}
+
+message LoginResData {
+  string Token = 1;
+  UserInfoResData info = 2;
+}
+
 service User {
   rpc AddUser(AddUserReq) returns(AddUserRes);
   rpc UpdateUser(UpdateUserReq) returns(UpdateUserRes);
   rpc UserInfo(UserInfoReq) returns(UserInfoRes);
+  rpc Login(LoginReq) returns(LoginRes);
 }

@@ -13,7 +13,13 @@ type MySQLConf struct {
 	Timeout   string
 }
 
+type Token struct {
+	AccessSecret string
+	AccessExpire int64
+}
+
 type Config struct {
 	zrpc.RpcServerConf
 	MySQLConf MySQLConf
+	Token     Token
 }

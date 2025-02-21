@@ -4,7 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/models"
+	"github.com/boyyang-love/micro-service-wallpaper-models/models"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/helper"
 	"gorm.io/gorm"
 
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/internal/svc"
@@ -28,10 +29,14 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddUserLo
 }
 
 func (l *AddUserLogic) AddUser(in *user.AddUserReq) (*user.AddUserRes, error) {
+	password, err := helper.MakeHash(in.Password)
+	if err != nil {
+		return nil, err
+	}
 	userInfo := models.User{
 		Username: in.Username,
 		Account:  in.Account,
-		Password: in.Password,
+		Password: password,
 		Role:     in.Role,
 	}
 
@@ -56,7 +61,7 @@ func (l *AddUserLogic) AddUser(in *user.AddUserReq) (*user.AddUserRes, error) {
 				Msg:  "用户新增成功",
 			},
 			Data: &user.AddUserResData{
-				Id:       uint64(userInfo.Id),
+				Id:       userInfo.Id,
 				Username: userInfo.Username,
 				Account:  userInfo.Account,
 			},

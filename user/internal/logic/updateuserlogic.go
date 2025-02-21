@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/models"
+	"github.com/boyyang-love/micro-service-wallpaper-models/models"
 
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/user/pb/user"
