@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
 	"github.com/minio/minio-go/v7"
 
@@ -33,14 +32,12 @@ func (l *ImageUploadLogic) ImageUpload(in *upload.ImageUploadReq) (*upload.Image
 		return nil, err
 	}
 
-	imagePath := fmt.Sprintf("%s/%s.webp", in.Path, helper.FileNameNoExt(in.FileName))
-	oriImagePath := fmt.Sprintf("%s/%s", in.OriPath, in.FileName)
 	uploadInfo, err := l.svcCtx.
 		MinioClient.
 		PutObject(
 			l.ctx,
 			in.BucketName,
-			imagePath,
+			in.Path,
 			comp.Buf,
 			comp.Size,
 			minio.PutObjectOptions{},
@@ -54,7 +51,7 @@ func (l *ImageUploadLogic) ImageUpload(in *upload.ImageUploadReq) (*upload.Image
 		PutObject(
 			l.ctx,
 			in.BucketName,
-			oriImagePath,
+			in.OriPath,
 			comp.OriBuf,
 			comp.OriSize,
 			minio.PutObjectOptions{},

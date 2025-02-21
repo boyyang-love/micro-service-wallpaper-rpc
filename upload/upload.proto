@@ -29,7 +29,6 @@ message FileUploadResData {
 
 message ImageUploadReq {
   bytes  File = 1;
-  string FileName = 2;
   string Path = 3;
   string OriPath = 4;
   uint32 Quality = 5;
