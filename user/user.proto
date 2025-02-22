@@ -69,24 +69,8 @@ message UserInfoResData {
   string Cover = 13;
 }
 
-message LoginReq {
-  string Username = 1;
-  string Password = 2;
-}
-
-message LoginRes {
-  Base base = 1;
-  LoginResData data = 2;
-}
-
-message LoginResData {
-  string Token = 1;
-  UserInfoResData info = 2;
-}
-
 service User {
   rpc AddUser(AddUserReq) returns(AddUserRes);
   rpc UpdateUser(UpdateUserReq) returns(UpdateUserRes);
   rpc UserInfo(UserInfoReq) returns(UserInfoRes);
-  rpc Login(LoginReq) returns(LoginRes);
 }

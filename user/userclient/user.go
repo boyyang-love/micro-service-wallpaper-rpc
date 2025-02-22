@@ -18,9 +18,6 @@ type (
 	AddUserRes      = user.AddUserRes
 	AddUserResData  = user.AddUserResData
 	Base            = user.Base
-	LoginReq        = user.LoginReq
-	LoginRes        = user.LoginRes
-	LoginResData    = user.LoginResData
 	UpdateUserReq   = user.UpdateUserReq
 	UpdateUserRes   = user.UpdateUserRes
 	UserInfoReq     = user.UserInfoReq
@@ -31,7 +28,6 @@ type (
 		AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserRes, error)
 		UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserRes, error)
 		UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoRes, error)
-		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error)
 	}
 
 	defaultUser struct {
@@ -58,9 +54,4 @@ func (m *defaultUser) UpdateUser(ctx context.Context, in *UpdateUserReq, opts ..
 func (m *defaultUser) UserInfo(ctx context.Context, in *UserInfoReq, opts ...grpc.CallOption) (*UserInfoRes, error) {
 	client := user.NewUserClient(m.cli.Conn())
 	return client.UserInfo(ctx, in, opts...)
-}
-
-func (m *defaultUser) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error) {
-	client := user.NewUserClient(m.cli.Conn())
-	return client.Login(ctx, in, opts...)
 }

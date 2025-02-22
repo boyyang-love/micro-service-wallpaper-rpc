@@ -66,8 +66,8 @@ func (l *ImageUploadLogic) ImageUpload(in *upload.ImageUploadReq) (*upload.Image
 			Msg:  "图片上传成功",
 		},
 		Data: &upload.ImageUploadResData{
-			Path:    imagePath,
-			OriPath: oriImagePath,
+			Path:    in.Path,
+			OriPath: in.OriPath,
 			ETag:    uploadInfo.ETag,
 			OriETag: oriUploadInfo.ETag,
 			Size:    uint64(uploadInfo.Size),
