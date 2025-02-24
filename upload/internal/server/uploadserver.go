@@ -32,3 +32,8 @@ func (s *UploadServer) ImageUpload(ctx context.Context, in *upload.ImageUploadRe
 	l := logic.NewImageUploadLogic(ctx, s.svcCtx)
 	return l.ImageUpload(in)
 }
+
+func (s *UploadServer) ImageDelete(ctx context.Context, in *upload.ImageDeleteReq) (*upload.Base, error) {
+	l := logic.NewImageDeleteLogic(ctx, s.svcCtx)
+	return l.ImageDelete(in)
+}

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Upload_FileUpload_FullMethodName  = "/upload.Upload/FileUpload"
 	Upload_ImageUpload_FullMethodName = "/upload.Upload/ImageUpload"
+	Upload_ImageDelete_FullMethodName = "/upload.Upload/ImageDelete"
 )
 
 // UploadClient is the client API for Upload service.
@@ -29,6 +30,7 @@ const (
 type UploadClient interface {
 	FileUpload(ctx context.Context, in *FileUploadReq, opts ...grpc.CallOption) (*FileUploadRes, error)
 	ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error)
+	ImageDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error)
 }
 
 type uploadClient struct {
@@ -57,12 +59,22 @@ func (c *uploadClient) ImageUpload(ctx context.Context, in *ImageUploadReq, opts
 	return out, nil
 }
 
+func (c *uploadClient) ImageDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error) {
+	out := new(Base)
+	err := c.cc.Invoke(ctx, Upload_ImageDelete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UploadServer is the server API for Upload service.
 // All implementations must embed UnimplementedUploadServer
 // for forward compatibility
 type UploadServer interface {
 	FileUpload(context.Context, *FileUploadReq) (*FileUploadRes, error)
 	ImageUpload(context.Context, *ImageUploadReq) (*ImageUploadRes, error)
+	ImageDelete(context.Context, *ImageDeleteReq) (*Base, error)
 	mustEmbedUnimplementedUploadServer()
 }
 
@@ -75,6 +87,9 @@ func (UnimplementedUploadServer) FileUpload(context.Context, *FileUploadReq) (*F
 }
 func (UnimplementedUploadServer) ImageUpload(context.Context, *ImageUploadReq) (*ImageUploadRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImageUpload not implemented")
+}
+func (UnimplementedUploadServer) ImageDelete(context.Context, *ImageDeleteReq) (*Base, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ImageDelete not implemented")
 }
 func (UnimplementedUploadServer) mustEmbedUnimplementedUploadServer() {}
 
@@ -125,6 +140,24 @@ func _Upload_ImageUpload_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Upload_ImageDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ImageDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UploadServer).ImageDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Upload_ImageDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UploadServer).ImageDelete(ctx, req.(*ImageDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Upload_ServiceDesc is the grpc.ServiceDesc for Upload service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -139,6 +172,10 @@ var Upload_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ImageUpload",
 			Handler:    _Upload_ImageUpload_Handler,
+		},
+		{
+			MethodName: "ImageDelete",
+			Handler:    _Upload_ImageDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

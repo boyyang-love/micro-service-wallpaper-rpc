@@ -49,7 +49,13 @@ message ImageUploadResData {
   uint64 OriSize = 6;
 }
 
+message ImageDeleteReq {
+  repeated string Paths = 1;
+  string BucketName = 3;
+}
+
 service Upload {
   rpc FileUpload(FileUploadReq) returns(FileUploadRes);
   rpc ImageUpload(ImageUploadReq) returns(ImageUploadRes);
+  rpc ImageDelete(ImageDeleteReq) returns(Base);
 }

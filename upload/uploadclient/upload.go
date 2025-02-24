@@ -18,6 +18,7 @@ type (
 	FileUploadReq      = upload.FileUploadReq
 	FileUploadRes      = upload.FileUploadRes
 	FileUploadResData  = upload.FileUploadResData
+	ImageDeleteReq     = upload.ImageDeleteReq
 	ImageUploadReq     = upload.ImageUploadReq
 	ImageUploadRes     = upload.ImageUploadRes
 	ImageUploadResData = upload.ImageUploadResData
@@ -25,6 +26,7 @@ type (
 	Upload interface {
 		FileUpload(ctx context.Context, in *FileUploadReq, opts ...grpc.CallOption) (*FileUploadRes, error)
 		ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error)
+		ImageDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error)
 	}
 
 	defaultUpload struct {
@@ -46,4 +48,9 @@ func (m *defaultUpload) FileUpload(ctx context.Context, in *FileUploadReq, opts 
 func (m *defaultUpload) ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error) {
 	client := upload.NewUploadClient(m.cli.Conn())
 	return client.ImageUpload(ctx, in, opts...)
+}
+
+func (m *defaultUpload) ImageDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error) {
+	client := upload.NewUploadClient(m.cli.Conn())
+	return client.ImageDelete(ctx, in, opts...)
 }
