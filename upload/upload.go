@@ -23,14 +23,15 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+
 		upload.RegisterUploadServer(grpcServer, server.NewUploadServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}
 	})
+
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)

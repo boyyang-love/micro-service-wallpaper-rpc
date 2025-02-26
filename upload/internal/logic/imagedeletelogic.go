@@ -24,11 +24,11 @@ func NewImageDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Image
 }
 
 func (l *ImageDeleteLogic) ImageDelete(in *upload.ImageDeleteReq) (*upload.Base, error) {
-	
+
 	for _, item := range in.Paths {
 		err := l.svcCtx.MinioClient.RemoveObject(l.ctx, in.BucketName, item, minio.RemoveObjectOptions{})
 		if err != nil {
-			return nil, err
+			panic(err)
 		}
 	}
 
