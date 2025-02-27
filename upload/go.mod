@@ -3,10 +3,9 @@ module github.com/boyyang-love/micro-service-wallpaper-rpc/upload
 go 1.23.1
 
 require (
-	github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250226152827-be6f7c7c2754
+	github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250227085056-d1013230909b
 	github.com/minio/minio-go/v7 v7.0.87
 	github.com/nickalie/go-webpbin v0.0.0-20220110095747-f10016bf2dc1
-	github.com/satori/go.uuid v1.2.0
 	github.com/zeromicro/go-zero v1.8.0
 	google.golang.org/grpc v1.70.0
 	google.golang.org/protobuf v1.36.5
@@ -73,6 +72,7 @@ require (
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/redis/go-redis/v9 v9.7.1 // indirect
 	github.com/rs/xid v1.6.0 // indirect
+	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
