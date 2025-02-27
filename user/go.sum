@@ -6,6 +6,8 @@ github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250225121405-f25
 github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250225121405-f25068867b48/go.mod h1:8mZ4ek1s2AY8BMYIyLLQZBcjOrLlRIhPoo2mGmAGkMs=
 github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250226152827-be6f7c7c2754 h1:po3GkWEZxAN/hQzudhdvAXvsGWcLDUaXJRG/8V3eyVw=
 github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250226152827-be6f7c7c2754/go.mod h1:8mZ4ek1s2AY8BMYIyLLQZBcjOrLlRIhPoo2mGmAGkMs=
+github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250227085056-d1013230909b h1:jueMa3cR+SQruyw+wm2hFxeGib8Uy5XI+t+nV9bq2eA=
+github.com/boyyang-love/micro-service-wallpaper-models v0.0.0-20250227085056-d1013230909b/go.mod h1:8mZ4ek1s2AY8BMYIyLLQZBcjOrLlRIhPoo2mGmAGkMs=
 github.com/cenkalti/backoff/v4 v4.3.0 h1:MyRJ/UdXutAwSAT+s3wNd7MfTIcy71VQueUuFK343L8=
 github.com/cenkalti/backoff/v4 v4.3.0/go.mod h1:Y3VNntkOUPxTVeUxJ/G5vcM//AlwfmyYozVcomhLiZE=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
