@@ -21,6 +21,7 @@ func main() {
 	flag.Parse()
 
 	var c config.Config
+
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
@@ -31,6 +32,11 @@ func main() {
 			reflection.Register(grpcServer)
 		}
 	})
+
+	s.AddOptions(
+		grpc.MaxRecvMsgSize(1024*1024*20),
+		grpc.MaxSendMsgSize(1024*1024*10),
+	)
 
 	defer s.Stop()
 
