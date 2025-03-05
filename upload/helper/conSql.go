@@ -29,22 +29,26 @@ func ConMySQL(mySQLConf config.MySQLConf) (db *gorm.DB, err error) {
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
 
-	if err = AutoMigrate(db); err != nil {
+	if err = AutoMigrate(db, true); err != nil {
 		return db, err
 	}
 
 	return db, err
 }
 
-func AutoMigrate(db *gorm.DB) (err error) {
+func AutoMigrate(db *gorm.DB, force bool) (err error) {
 
 	var tables = []interface{}{
 		&models.Upload{},
 	}
 
 	for _, table := range tables {
-		if !db.Migrator().HasTable(table) {
+		if force {
 			err = db.AutoMigrate(table)
+		} else {
+			if !db.Migrator().HasTable(table) {
+				err = db.AutoMigrate(table)
+			}
 		}
 	}
 
