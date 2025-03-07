@@ -34,7 +34,7 @@ func main() {
 	})
 
 	s.AddOptions(
-		grpc.MaxRecvMsgSize(1024*1024*20),
+		grpc.MaxRecvMsgSize(1024*1024*50),
 		grpc.MaxSendMsgSize(1024*1024*10),
 	)
 
