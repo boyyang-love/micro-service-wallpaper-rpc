@@ -1,4 +1,4 @@
-module email
+module github.com/boyyang-love/micro-service-wallpaper-rpc/email
 
 go 1.24.0
 
