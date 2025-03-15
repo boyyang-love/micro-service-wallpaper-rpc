@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-
-	"email/internal/config"
-	"email/internal/server"
-	"email/internal/svc"
-	"email/pb/email"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/config"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/server"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/svc"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/pb/email"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

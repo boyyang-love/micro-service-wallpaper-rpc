@@ -7,9 +7,9 @@ package server
 import (
 	"context"
 
-	"email/internal/logic"
-	"email/internal/svc"
-	"email/pb/email"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/logic"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/svc"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/pb/email"
 )
 
 type EmailServer struct {

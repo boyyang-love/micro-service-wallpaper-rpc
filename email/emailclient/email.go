@@ -7,7 +7,7 @@ package emailclient
 import (
 	"context"
 
-	"email/pb/email"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/pb/email"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

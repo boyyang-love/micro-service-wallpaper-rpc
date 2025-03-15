@@ -2,9 +2,8 @@ package logic
 
 import (
 	"context"
-
-	"email/internal/svc"
-	"email/pb/email"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/svc"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/email/pb/email"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
