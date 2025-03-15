@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.UserName}}</title>
+    <style>
+        .content {
+            box-sizing: border-box;
+            width: 100%;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+            background: #71c4ef;
+            padding: 10px;
+        }
+
+        .msg-box .title {
+            font-size: 14px;
+            font-weight: bolder;
+            margin-bottom: 10px;
+        }
+
+        .msg-box-info {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .msg-box-info span {
+            font-size: 13px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .code,
+        .msg {
+            color: deeppink;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="boyyang-img">
+        <div class="msg-box">
+            <div class="title">{{.Title}}</div>
+            <div class="msg-box-info">
+                <span>尊敬的用户，您好!</span>
+                <span>您的验证码为：<a class="code"> {{.Code}} </a> , 请勿泄漏!</span>
+                <span>验证码有效期为: <span class="msg"> {{.Time}} </span>分钟!</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

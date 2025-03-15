@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package email;
+option go_package = "./email";
+
+message Base{
+  uint32 Code = 1;
+  string Msg = 2;
+}
+
+message SendEmailReq {
+  string Email = 1;
+  string Subject = 2;
+  string Body = 3;
+}
+
+message SendEmailRes {
+  string Msg = 1;
+}
+
+message SendEmailCodeReq {
+  string Email = 1;
+  string Code = 2;
+  string Subject = 3;
+  string Title = 4;
+  int32 Time = 5;
+}
+
+message SendEmailCodeRes {
+  Base Base = 1;
+}
+
+service Email {
+  rpc SendEmail(SendEmailReq) returns(SendEmailRes);
+  rpc SendEmailCode(SendEmailCodeReq) returns(SendEmailCodeRes);
+}
