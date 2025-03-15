@@ -1,6 +1,6 @@
 package svc
 
-import "email/internal/config"
+import "github.com/boyyang-love/micro-service-wallpaper-rpc/email/internal/config"
 
 type ServiceContext struct {
 	Config config.Config
