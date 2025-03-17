@@ -3,7 +3,7 @@ module github.com/boyyang-love/micro-service-wallpaper-rpc/upload
 go 1.24
 
 require (
-	github.com/boyyang-love/micro-service-wallpaper-models v1.0.1
+	github.com/boyyang-love/micro-service-wallpaper-models v1.0.2
 	github.com/minio/minio-go/v7 v7.0.88
 	github.com/nickalie/go-webpbin v0.0.0-20220110095747-f10016bf2dc1
 	github.com/zeromicro/go-zero v1.8.1

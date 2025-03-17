@@ -40,10 +40,7 @@ func SendEmail(params SendEmailParams) error {
 		HTML:    body.Bytes(),
 	}
 
-	err = e.Send("smtp.qq.com:587", smtp.PlainAuth("", "1761617270@qq.com", "oxixpvgbskpwhfdi", "smtp.qq.com"))
-	if err != nil {
-		return err
-	}
-
+	_ = e.Send("smtp.qq.com:587", smtp.PlainAuth("", "1761617270@qq.com", "giqzyspehhdddaig", "smtp.qq.com"))
+	
 	return nil
 }

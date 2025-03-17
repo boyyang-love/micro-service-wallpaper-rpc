@@ -29,7 +29,7 @@ func ConMySQL(mySQLConf config.MySQLConf) (db *gorm.DB, err error) {
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
 
-	if err = AutoMigrate(db, true); err != nil {
+	if err = AutoMigrate(db, false); err != nil {
 		return db, err
 	}
 

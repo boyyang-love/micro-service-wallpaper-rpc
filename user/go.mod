@@ -3,7 +3,7 @@ module github.com/boyyang-love/micro-service-wallpaper-rpc/user
 go 1.24
 
 require (
-	github.com/boyyang-love/micro-service-wallpaper-models v1.0.1
+	github.com/boyyang-love/micro-service-wallpaper-models v1.0.2
 	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/zeromicro/go-zero v1.8.1
 	google.golang.org/grpc v1.71.0
