@@ -13,7 +13,9 @@ logs
 main
 .bin
 
-etc/blog-backend.yaml
+email/etc/email.yaml
+upload/etc/upload.yaml
+user/etc/user.yaml
 
 default.etcd
 
