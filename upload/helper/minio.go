@@ -20,3 +20,15 @@ func Minio(endpoint string, accessKey string, secretAccessKey string, secure boo
 
 	return minioClient, nil
 }
+
+func MinioCore(endpoint string, accessKey string, secretAccessKey string, secure bool) (minioCore *minio.Core, err error) {
+	minioCore, err = minio.NewCore(endpoint, &minio.Options{
+		Creds:  credentials.NewStaticV4(accessKey, secretAccessKey, ""),
+		Secure: secure,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return minioCore, nil
+}

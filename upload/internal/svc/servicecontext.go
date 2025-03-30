@@ -13,6 +13,7 @@ type ServiceContext struct {
 	Config      config.Config
 	DB          *gorm.DB
 	MinioClient *minio.Client
+	MinioCore   *minio.Core
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -36,9 +37,22 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		fmt.Println("对象存储连接成功")
 	}
 
+	minioCore, err := helper.MinioCore(
+		c.MinioClientConf.Endpoint,
+		c.MinioClientConf.AccessKey,
+		c.MinioClientConf.SecretKey,
+		c.MinioClientConf.Secure,
+	)
+	if err != nil {
+		fmt.Printf("minioCore:对象存储连接失败(%s)\n", err.Error())
+	} else {
+		fmt.Println("minioCore:对象存储连接成功")
+	}
+
 	return &ServiceContext{
 		Config:      c,
 		DB:          db,
 		MinioClient: minioClient,
+		MinioCore:   minioCore,
 	}
 }

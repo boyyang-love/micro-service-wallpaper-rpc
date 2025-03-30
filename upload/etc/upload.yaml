@@ -1,6 +1,6 @@
 Name: upload.rpc
 ListenOn: 0.0.0.0:8080
-Timeout: 30000
+Timeout: 50000
 # 日志
 Log:
   Mode: file
