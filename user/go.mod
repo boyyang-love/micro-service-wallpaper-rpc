@@ -3,13 +3,13 @@ module github.com/boyyang-love/micro-service-wallpaper-rpc/user
 go 1.24.0
 
 require (
-	github.com/boyyang-love/micro-service-wallpaper-models v1.0.6
+	github.com/boyyang-love/micro-service-wallpaper-models v1.1.0
 	github.com/golang-jwt/jwt/v4 v4.5.2
-	github.com/zeromicro/go-zero v1.8.2
-	google.golang.org/grpc v1.72.0
+	github.com/zeromicro/go-zero v1.8.3
+	google.golang.org/grpc v1.72.1
 	google.golang.org/protobuf v1.36.6
 	gorm.io/driver/mysql v1.5.7
-	gorm.io/gorm v1.25.12
+	gorm.io/gorm v1.26.1
 )
 
 require (
@@ -54,15 +54,15 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
-	github.com/prometheus/common v0.63.0 // indirect
+	github.com/prometheus/common v0.64.0 // indirect
 	github.com/prometheus/procfs v0.16.1 // indirect
-	github.com/redis/go-redis/v9 v9.7.3 // indirect
+	github.com/redis/go-redis/v9 v9.8.0 // indirect
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
-	go.etcd.io/etcd/api/v3 v3.5.21 // indirect
-	go.etcd.io/etcd/client/pkg/v3 v3.5.21 // indirect
-	go.etcd.io/etcd/client/v3 v3.5.21 // indirect
+	go.etcd.io/etcd/api/v3 v3.6.0 // indirect
+	go.etcd.io/etcd/client/pkg/v3 v3.6.0 // indirect
+	go.etcd.io/etcd/client/v3 v3.6.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.35.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.17.0 // indirect
@@ -74,28 +74,28 @@ require (
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
-	go.opentelemetry.io/proto/otlp v1.5.0 // indirect
+	go.opentelemetry.io/proto/otlp v1.6.0 // indirect
 	go.uber.org/automaxprocs v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
-	golang.org/x/net v0.39.0 // indirect
-	golang.org/x/oauth2 v0.29.0 // indirect
-	golang.org/x/sys v0.32.0 // indirect
-	golang.org/x/term v0.31.0 // indirect
-	golang.org/x/text v0.24.0 // indirect
+	golang.org/x/net v0.40.0 // indirect
+	golang.org/x/oauth2 v0.30.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/term v0.32.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20250422160041-2d3770c4ea7f // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250422160041-2d3770c4ea7f // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20250519155744-55703ea1f237 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250519155744-55703ea1f237 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/api v0.33.0 // indirect
-	k8s.io/apimachinery v0.33.0 // indirect
-	k8s.io/client-go v0.33.0 // indirect
+	k8s.io/api v0.33.1 // indirect
+	k8s.io/apimachinery v0.33.1 // indirect
+	k8s.io/client-go v0.33.1 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20250318190949-c8a335a9a2ff // indirect
-	k8s.io/utils v0.0.0-20250321185631-1f6e0b77f77e // indirect
+	k8s.io/utils v0.0.0-20250502105355-0f33e8f1c979 // indirect
 	sigs.k8s.io/json v0.0.0-20241014173422-cfa47c3a1cc8 // indirect
 	sigs.k8s.io/randfill v1.0.0 // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.7.0 // indirect
