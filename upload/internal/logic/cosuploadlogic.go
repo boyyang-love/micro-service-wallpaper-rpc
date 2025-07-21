@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
 
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
@@ -33,12 +34,13 @@ func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUplo
 	_, err = l.
 		svcCtx.
 		CosClient.
-		Object.Put(
-		l.ctx,
-		in.Path,
-		comp.Buf,
-		nil,
-	)
+		Object.
+		Put(
+			l.ctx,
+			in.Path,
+			comp.Buf,
+			nil,
+		)
 	if err != nil {
 		return nil, err
 	}
@@ -46,16 +48,19 @@ func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUplo
 	_, err = l.
 		svcCtx.
 		CosClient.
-		Object.Put(
-		l.ctx,
-		in.Path,
-		comp.OriBuf,
-		nil,
-	)
+		Object.
+		Put(
+			l.ctx,
+			in.Path,
+			comp.OriBuf,
+			nil,
+		)
 
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Print("xxxxxm,,,,")
 
 	return &upload.ImageUploadRes{
 		Base: &upload.Base{
