@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/config"
+	"github.com/tencentyun/cos-go-sdk-v5"
 
 	"github.com/minio/minio-go/v7"
 	"gorm.io/gorm"
@@ -14,6 +15,7 @@ type ServiceContext struct {
 	DB          *gorm.DB
 	MinioClient *minio.Client
 	MinioCore   *minio.Core
+	CosClient   *cos.Client
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -49,10 +51,16 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		fmt.Println("minioCore:对象存储连接成功")
 	}
 
+	cosClient := helper.COS(c.COSClientConf.CosUrl, c.COSClientConf.SecretID, c.COSClientConf.SecretKey)
+	if cosClient != nil {
+		fmt.Printf("cos:对象存储连接成功\n")
+	}
+
 	return &ServiceContext{
 		Config:      c,
 		DB:          db,
 		MinioClient: minioClient,
 		MinioCore:   minioCore,
+		CosClient:   cosClient,
 	}
 }

@@ -20,8 +20,15 @@ type MinioClientConf struct {
 	Secure    bool
 }
 
+type COSClientConf struct {
+	CosUrl    string
+	SecretID  string
+	SecretKey string
+}
+
 type Config struct {
 	zrpc.RpcServerConf
 	MySQLConf       MySQLConf
 	MinioClientConf MinioClientConf
+	COSClientConf   COSClientConf
 }

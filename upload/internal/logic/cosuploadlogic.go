@@ -1,0 +1,74 @@
+package logic
+
+import (
+	"context"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/helper"
+
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
+	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/pb/upload"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type CosUploadLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+}
+
+func NewCosUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CosUploadLogic {
+	return &CosUploadLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+	}
+}
+
+func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUploadRes, error) {
+	comp, err := helper.Image2Webp(&in.File, uint(in.Quality))
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = l.
+		svcCtx.
+		CosClient.
+		Object.Put(
+		l.ctx,
+		in.Path,
+		comp.Buf,
+		nil,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = l.
+		svcCtx.
+		CosClient.
+		Object.Put(
+		l.ctx,
+		in.Path,
+		comp.OriBuf,
+		nil,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &upload.ImageUploadRes{
+		Base: &upload.Base{
+			Code: 1,
+			Msg:  "图片上传成功",
+		},
+		Data: &upload.ImageUploadResData{
+			Path:    in.Path,
+			OriPath: in.OriPath,
+			ETag:    helper.MakeImageFileHashByBytes(comp.Buf.Bytes()),
+			OriETag: helper.MakeImageFileHashByBytes(comp.OriBuf.Bytes()),
+			Size:    uint64(comp.Size),
+			OriSize: uint64(comp.OriSize),
+		},
+	}, nil
+}
