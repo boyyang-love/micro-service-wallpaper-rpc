@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/internal/svc"
 	"github.com/boyyang-love/micro-service-wallpaper-rpc/upload/pb/upload"
+	"github.com/tencentyun/cos-go-sdk-v5"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,9 +27,9 @@ func NewCosDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CosDele
 func (l *CosDeleteLogic) CosDelete(in *upload.ImageDeleteReq) (*upload.Base, error) {
 	for _, item := range in.Paths {
 		imgPath := fmt.Sprintf("%s/%s", in.BucketName, item)
-		err, _ := l.svcCtx.CosClient.Object.Delete(l.ctx, imgPath)
+		_, err := l.svcCtx.CosClient.Object.Delete(l.ctx, imgPath, &cos.ObjectDeleteOptions{})
 		if err != nil {
-			panic(err)
+			return nil, err
 		}
 	}
 
