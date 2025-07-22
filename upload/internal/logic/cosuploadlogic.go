@@ -31,13 +31,15 @@ func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUplo
 		return nil, err
 	}
 
+	imgOriPath := fmt.Sprintf("%s/%s", in.BucketName, in.OriPath)
+	imgComPath := fmt.Sprintf("%s/%s", in.BucketName, in.Path)
 	_, err = l.
 		svcCtx.
 		CosClient.
 		Object.
 		Put(
 			l.ctx,
-			in.Path,
+			imgComPath,
 			comp.Buf,
 			nil,
 		)
@@ -51,7 +53,7 @@ func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUplo
 		Object.
 		Put(
 			l.ctx,
-			in.Path,
+			imgOriPath,
 			comp.OriBuf,
 			nil,
 		)
@@ -59,8 +61,6 @@ func (l *CosUploadLogic) CosUpload(in *upload.ImageUploadReq) (*upload.ImageUplo
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Print("xxxxxm,,,,")
 
 	return &upload.ImageUploadRes{
 		Base: &upload.Base{

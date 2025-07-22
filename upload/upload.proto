@@ -59,4 +59,5 @@ service Upload {
   rpc ImageUpload(ImageUploadReq) returns(ImageUploadRes);
   rpc ImageDelete(ImageDeleteReq) returns(Base);
   rpc CosUpload(ImageUploadReq) returns(ImageUploadRes);
+  rpc CosDelete(ImageDeleteReq) returns(Base);
 }

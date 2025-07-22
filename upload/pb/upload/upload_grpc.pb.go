@@ -23,6 +23,7 @@ const (
 	Upload_ImageUpload_FullMethodName = "/upload.Upload/ImageUpload"
 	Upload_ImageDelete_FullMethodName = "/upload.Upload/ImageDelete"
 	Upload_CosUpload_FullMethodName   = "/upload.Upload/CosUpload"
+	Upload_CosDelete_FullMethodName   = "/upload.Upload/CosDelete"
 )
 
 // UploadClient is the client API for Upload service.
@@ -33,6 +34,7 @@ type UploadClient interface {
 	ImageUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error)
 	ImageDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error)
 	CosUpload(ctx context.Context, in *ImageUploadReq, opts ...grpc.CallOption) (*ImageUploadRes, error)
+	CosDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error)
 }
 
 type uploadClient struct {
@@ -79,6 +81,15 @@ func (c *uploadClient) CosUpload(ctx context.Context, in *ImageUploadReq, opts .
 	return out, nil
 }
 
+func (c *uploadClient) CosDelete(ctx context.Context, in *ImageDeleteReq, opts ...grpc.CallOption) (*Base, error) {
+	out := new(Base)
+	err := c.cc.Invoke(ctx, Upload_CosDelete_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UploadServer is the server API for Upload service.
 // All implementations must embed UnimplementedUploadServer
 // for forward compatibility
@@ -87,6 +98,7 @@ type UploadServer interface {
 	ImageUpload(context.Context, *ImageUploadReq) (*ImageUploadRes, error)
 	ImageDelete(context.Context, *ImageDeleteReq) (*Base, error)
 	CosUpload(context.Context, *ImageUploadReq) (*ImageUploadRes, error)
+	CosDelete(context.Context, *ImageDeleteReq) (*Base, error)
 	mustEmbedUnimplementedUploadServer()
 }
 
@@ -105,6 +117,9 @@ func (UnimplementedUploadServer) ImageDelete(context.Context, *ImageDeleteReq) (
 }
 func (UnimplementedUploadServer) CosUpload(context.Context, *ImageUploadReq) (*ImageUploadRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CosUpload not implemented")
+}
+func (UnimplementedUploadServer) CosDelete(context.Context, *ImageDeleteReq) (*Base, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CosDelete not implemented")
 }
 func (UnimplementedUploadServer) mustEmbedUnimplementedUploadServer() {}
 
@@ -191,6 +206,24 @@ func _Upload_CosUpload_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Upload_CosDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ImageDeleteReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UploadServer).CosDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Upload_CosDelete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UploadServer).CosDelete(ctx, req.(*ImageDeleteReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Upload_ServiceDesc is the grpc.ServiceDesc for Upload service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -213,6 +246,10 @@ var Upload_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CosUpload",
 			Handler:    _Upload_CosUpload_Handler,
+		},
+		{
+			MethodName: "CosDelete",
+			Handler:    _Upload_CosDelete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
